@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    url: jdbc:sqlite:./database.db
+    driver-class-name: org.sqlite.JDBC
+  jpa:
+    database-platform: org.hibernate.community.dialect.SQLiteDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate.format_sql: true
+  application:
+    name: empleados-service
+server:
+  port: 8081
