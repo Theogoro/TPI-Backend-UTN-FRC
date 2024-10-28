@@ -6,6 +6,8 @@ Integrantes:
 - adas
 - asd
 
+Version de Java: 21
+
 Listado de proyectos:
 - Pruebas
 - Empelados

@@ -12,7 +12,7 @@
     <java.version>22</java.version>
     <spring-boot.version>3.3.4</spring-boot.version>
     <spring-cloud.version>2023.0.3</spring-cloud.version>
-    <sqlite.version>3.47.0.0</sqlite.version>
+    <sqlite.version>3.44.1.0</sqlite.version>
   </properties>
   <dependencies>
   <dependency>
@@ -53,8 +53,24 @@
 
   <modules>
     <module>pruebas</module>
-    <module>empleados</module>
     <module>gateway</module>
+    <module>empleados</module>
     <module>notificaciones</module>
   </modules>
+
+
+  <build>
+    <plugins>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-compiler-plugin</artifactId>
+            <version>3.8.1</version>
+            <configuration>
+                <source>${java.version}</source>  <!-- Especifica la versión de Java deseada -->
+                <target>${java.version}</target>  <!-- Especifica la versión de Java deseada -->
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
+
 </project>

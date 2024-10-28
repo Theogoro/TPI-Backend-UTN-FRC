@@ -7,4 +7,5 @@ import com.backend.empleados.model.entity.Employee;
 
 @Repository
 public interface EmployeeRepository extends PagingAndSortingRepository<Employee, Long> {
+  public Employee save(Employee employee);
 }

@@ -23,4 +23,8 @@ public class EmployeeService {
     PageRequest pageRequest = PageRequest.of(page, size);
     return employeeRepository.findAll(pageRequest).getContent();
   }
+
+  public Employee createEmployee(Employee employee) {
+    return employeeRepository.save(employee);
+  }
 }
