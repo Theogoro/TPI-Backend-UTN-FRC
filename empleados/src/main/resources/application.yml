@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:sqlite:./database.db
+    url: jdbc:sqlite:./employee.db
     driver-class-name: org.sqlite.JDBC
   jpa:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
@@ -10,6 +10,6 @@ spring:
     properties:
       hibernate.format_sql: true
   application:
-    name: empleados-service
+    name: employee-service
 server:
   port: 8081
