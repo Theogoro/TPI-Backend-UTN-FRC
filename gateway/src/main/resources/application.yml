@@ -1,8 +1,9 @@
+api-gw.url-microservicio-employees: http://localhost:8081
+api-gw.url-microservicio-pruebas: http://localhost:8082
+api-gw.url-microservicio-notificaciones: http://localhost:8083
+server:
+  port: 8080
+
 spring:
-  cloud:
-    gateway:
-      routes:
-        - id: pruebas
-          uri: http://localhost:8082
-          predicates:
-            - Path=/service1/**
+  main:
+    web-application-type: reactive
