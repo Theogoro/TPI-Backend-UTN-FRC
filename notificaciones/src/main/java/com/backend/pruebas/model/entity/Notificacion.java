@@ -12,11 +12,9 @@ public class Notificacion {
     private Long id;
     private String tipo;
     private String mensaje;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_empleado")
-    private Employee empleado;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_interesado")
-    private Interesado interesado;
+    @Column(name = "id_empleado")
+    private Long idEmpleado;
+    @Column(name = "id_interesado")
+    private Long idInteresado;
 
 }

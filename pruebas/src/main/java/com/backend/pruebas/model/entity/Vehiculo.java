@@ -15,13 +15,8 @@ public class Vehiculo {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String patente;
+    @Column(name = "anio")
     private int anio;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_modelo")
-    private Modelo modelo;
-    @OneToMany(mappedBy = "vehiculo")
-    private Set<Prueba> pruebas;
-    @OneToOne(mappedBy = "vehiculo")
-    private Posicion posicion;
-
+    @Column(name = "id_modelo")
+    private Long idModelo;
 }

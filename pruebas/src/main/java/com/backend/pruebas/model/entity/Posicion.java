@@ -11,9 +11,9 @@ public class Posicion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-   @OneToOne(cascade = CascadeType.ALL)
-   @JoinColumn(name = "id_vehiculo")
-    private Vehiculo vehiculo;
+    @Column(name = "id_vehiculo")
+    private Long idVehiculo;
+    @Column(name = "fecha_hora")
     private LocalDateTime fechaHora;
     private Long latitud;
     private Long longitud;

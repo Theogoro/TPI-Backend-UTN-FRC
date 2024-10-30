@@ -15,6 +15,4 @@ public class Marca {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String nombre;
-    @OneToMany(mappedBy = "marca")
-    private Set<Modelo> modelos;
 }

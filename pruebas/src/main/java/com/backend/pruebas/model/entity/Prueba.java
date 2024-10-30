@@ -15,16 +15,15 @@ public class Prueba {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_vehiculo")
-    private Vehiculo vehiculo;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_empleado")
-    private Employee empleado;
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "id_interesado")
-    private Interesado interesado;
-    private LocalDateTime fecha_hora_inicio;
-    private LocalDateTime fecha_hora_fin;
+    @Column(name = "id_vehiculo")
+    private Long idVehiculo;
+    @Column(name = "id_empleado")
+    private Long idEmpleado;
+    @Column(name = "id_interesado")
+    private Long idInteresado;
+    @Column(name = "fecha_hora_inicio")
+    private LocalDateTime fechaHoraInicio;
+    @Column(name = "fecha_hora_fin")
+    private LocalDateTime fechaHoraFin;
     private String comentarios;
 }
