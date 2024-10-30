@@ -11,11 +11,10 @@ import java.util.Set;
 @Table(name = "modelo")
 @NoArgsConstructor
 public class Modelo {
-    private long id;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name  = "id_marca")
-    private Marca marca;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+    @Column(name = "id_marca")
+    private Long idMarca;
     private String descripcion;
-    @OneToMany(mappedBy = "modelo")
-    private Set<Vehiculo> vehiculos;
 }
