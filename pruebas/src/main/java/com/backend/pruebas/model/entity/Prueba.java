@@ -20,7 +20,7 @@ public class Prueba {
     private Vehiculo vehiculo;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_empleado")
-    private Empleado empleado;
+    private Employee empleado;
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name = "id_interesado")
     private Interesado interesado;
