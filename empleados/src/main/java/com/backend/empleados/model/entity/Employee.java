@@ -5,21 +5,21 @@ import lombok.Data;
 
 @Entity
 @Data
-@Table(name = "employees")
+@Table(name = "empleados")
 public class Employee {
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   private Long id;
 
-  @Column(name = "first_name", nullable = false)
+  @Column(name = "nombre", nullable = false)
   private String firstName;
 
-  @Column(name = "last_name", nullable = false)
+  @Column(name = "apellido", nullable = false)
   private String lastName;
 
   @Column(name = "email", nullable = false, unique = true)
   private String email;
 
-  @Column(name = "phone_number", nullable = false)
+  @Column(name = "telefono_contacto", nullable = false)
   private String phoneNumber;
 }
