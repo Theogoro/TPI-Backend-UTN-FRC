@@ -1,4 +1,4 @@
-spring:
+  spring:
   datasource:
     url: jdbc:sqlite:./employees.db
     driver-class-name: org.sqlite.JDBC
