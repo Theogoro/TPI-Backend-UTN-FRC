@@ -4,6 +4,10 @@
 target
 **target
 
+**.db
+**.log
+**.log.*
+
 *.jar
 *.war
 *.nar
