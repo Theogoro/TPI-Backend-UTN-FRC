@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Data
@@ -37,6 +38,7 @@ public class Interesado {
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-
+    @OneToMany(mappedBy = "interesado")
+    private Set<Prueba> pruebas;
 }
 

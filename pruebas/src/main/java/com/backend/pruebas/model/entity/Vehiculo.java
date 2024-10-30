@@ -22,6 +22,6 @@ public class Vehiculo {
     @OneToMany(mappedBy = "vehiculo")
     private Set<Prueba> pruebas;
     @OneToOne(mappedBy = "vehiculo")
-    private Posiciones posicion;
+    private Posicion posicion;
 
 }
