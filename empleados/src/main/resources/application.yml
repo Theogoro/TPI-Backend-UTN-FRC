@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:sqlite:./employee.db
+    url: jdbc:sqlite:./employees.db
     driver-class-name: org.sqlite.JDBC
   jpa:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
@@ -13,3 +13,7 @@ spring:
     name: employee-service
 server:
   port: 8081
+logging:
+  level:
+    org.springframework.web: debug
+    org.hibernate: error
