@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 import java.time.LocalDateTime;
 
 @Entity
-@Data
 @Table(name = "pruebas")
 @NoArgsConstructor
+@Data
 public class Prueba {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

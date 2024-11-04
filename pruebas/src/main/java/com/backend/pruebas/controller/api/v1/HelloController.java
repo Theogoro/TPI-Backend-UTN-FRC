@@ -13,7 +13,7 @@ import com.backend.pruebas.model.entity.User;
 import com.backend.pruebas.service.UserService;
 
 @RestController
-@RequestMapping("/api/v1/pruebas")
+@RequestMapping("/api/v1/hellopruebas")
 public class HelloController {
     @Autowired
     private UserService userService;
@@ -56,4 +56,5 @@ public class HelloController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR); // Maneja el caso donde no se pudo guardar
         }
     }
+
 }

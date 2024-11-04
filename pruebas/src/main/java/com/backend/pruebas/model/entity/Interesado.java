@@ -32,7 +32,11 @@ public class Interesado {
 
     private String email;
 
-    @OneToMany(mappedBy = "interesado")
+    @OneToMany(mappedBy = "idInteresado")
     private Set<Prueba> pruebas;
+
+    public boolean isLicenciaVencida(){
+        return this.fechaVencimientoLicencia.isBefore(LocalDateTime.now());
+    }
 }
 
