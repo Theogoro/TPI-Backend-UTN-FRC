@@ -1,7 +1,7 @@
 # TPI Backend - 2024 - Grupo 71
 Integrantes:
 - Theo Berta 95064
-- asda
+- Oviedo Emiliano 94847
 - asdas
 - adas
 - asd
