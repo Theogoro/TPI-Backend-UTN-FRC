@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name="marca")
+@Table(name="marcas")
 @NoArgsConstructor
 public class Marca {
     @Id

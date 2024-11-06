@@ -26,4 +26,12 @@ public class Prueba {
     @Column(name = "fecha_hora_fin")
     private LocalDateTime fechaHoraFin;
     private String comentarios;
+
+    @ManyToOne
+    @JoinColumn(name = "id_vehiculo", insertable = false, updatable = false)
+    private Vehiculo vehiculo;
+
+    @ManyToOne
+    @JoinColumn(name = "id_empleado", insertable = false, updatable = false)
+    private Interesado interesado;
 }

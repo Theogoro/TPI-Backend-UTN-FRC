@@ -8,7 +8,7 @@ import java.util.Set;
 
 @Entity
 @Data
-@Table(name = "vehiculo")
+@Table(name = "vehiculos")
 @NoArgsConstructor
 public class Vehiculo {
     @Id

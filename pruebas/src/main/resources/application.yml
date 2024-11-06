@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:sqlite:./database.db
+    url: jdbc:sqlite:./pruebas.db
     driver-class-name: org.sqlite.JDBC
   jpa:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
