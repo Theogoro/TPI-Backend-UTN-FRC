@@ -6,8 +6,10 @@ import java.time.LocalDateTime;
 import jakarta.validation.constraints.*;
 
 import com.backend.pruebas.model.entity.Prueba;
+import lombok.NoArgsConstructor;
 
 @Data
+@NoArgsConstructor
 public class PruebaDTO {
     @NotNull(message = "El id del interesado no puede ser vacio")
     private Long interesadoId;

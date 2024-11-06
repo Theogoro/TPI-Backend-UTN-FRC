@@ -10,12 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/api/v1/pruebas")
@@ -30,7 +25,7 @@ public class PruebaController {
     }
 
     @GetMapping("")
-    public ResponseEntity<List<Prueba>> getPruebas(
+    public ResponseEntity<List<PruebaDTO>> getPruebas(
         @RequestParam(defaultValue = "0", name = "page") int page,
         @RequestParam(defaultValue = "10", name = "size") int size
     ) {
@@ -38,7 +33,21 @@ public class PruebaController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Prueba> getPruebaById(@RequestParam(name = "id") int id) {
+    public ResponseEntity<PruebaDTO> getPruebaById(@PathVariable(name = "id") int id) {
         return ResponseEntity.ok(pruebaService.getPruebaById(id));
     }
+
+    @GetMapping("/encurso")
+    public ResponseEntity<List<PruebaDTO>> getPruebasEnCurso(
+            @RequestParam(defaultValue = "0", name = "page") int page,
+            @RequestParam(defaultValue = "10", name = "size") int size
+    ) {
+        return ResponseEntity.ok(pruebaService.getPruebasEnCurso(page, size));
+    }
+    @PatchMapping("/{id}")
+    public ResponseEntity<Prueba> finalizarPrueba(@PathVariable(name = "id") int id,
+                                                  @RequestBody String comentario){
+        return ResponseEntity.ok(pruebaService.finalizarPrueba(id, comentario));
+    }
+
 }

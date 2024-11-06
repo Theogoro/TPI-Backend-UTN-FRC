@@ -15,8 +15,10 @@ import org.hibernate.query.Page;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.Pageable;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -59,5 +61,16 @@ public class PruebaService {
 
     public PruebaDTO getPruebaById(int id) {
         return new PruebaDTO(pruebaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se encontro la prueba")));
+    }
+    public List<PruebaDTO> getPruebasEnCurso(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return pruebaRepository.findByFechaHoraFinIsNull(pageRequest).stream().map(PruebaDTO::new).toList();
+    }
+
+    public Prueba finalizarPrueba(int id, String comentario) {
+        Prueba prueba = pruebaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se encontro la prueba"));
+        prueba.setComentario(comentario);
+        prueba.setFechaHoraFin(LocalDateTime.now());
+        return pruebaRepository.save(prueba);
     }
 }
