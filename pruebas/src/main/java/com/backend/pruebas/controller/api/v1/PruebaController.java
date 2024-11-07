@@ -44,6 +44,7 @@ public class PruebaController {
     ) {
         return ResponseEntity.ok(pruebaService.getPruebasEnCurso(page, size));
     }
+    
     @PatchMapping("/{id}")
     public ResponseEntity<Prueba> finalizarPrueba(@PathVariable(name = "id") int id,
                                                   @RequestBody String comentario){

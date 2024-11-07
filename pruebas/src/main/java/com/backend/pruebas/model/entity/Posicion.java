@@ -5,6 +5,8 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+import com.backend.pruebas.model.dto.ConfiguracionDTO;
+
 @Entity
 @Data
 @Table(name = "posiciones")
@@ -16,6 +18,6 @@ public class Posicion {
     private Long idVehiculo;
     @Column(name = "fecha_hora")
     private LocalDateTime fechaHora;
-    private Long latitud;
-    private Long longitud;
+    private Double latitud;
+    private Double longitud;
 }

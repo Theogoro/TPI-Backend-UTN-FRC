@@ -18,7 +18,3 @@ mvn clean install
 Correr el Proyecto pruebas
 
 `mvn -pl pruebas spring-boot:run`
-
-# tpi-backend-utn-frc
-"# tpi-backend-utn-frc" 
-# tpi-backend-utn-frc

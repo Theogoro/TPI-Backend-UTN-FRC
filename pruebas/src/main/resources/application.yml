@@ -13,3 +13,5 @@ spring:
     name: pruebas-service
 server:
   port: 8082
+external:
+  api-url: https://labsys.frc.utn.edu.ar/apps-disponibilizadas/backend/api/v1/configuracion/

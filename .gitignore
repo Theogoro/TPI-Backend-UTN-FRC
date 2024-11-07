@@ -8,6 +8,7 @@ target
 **.log
 **.log.*
 
+*.db
 *.jar
 *.war
 *.nar
