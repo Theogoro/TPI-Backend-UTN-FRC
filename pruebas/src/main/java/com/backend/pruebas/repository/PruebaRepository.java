@@ -13,4 +13,5 @@ public interface PruebaRepository extends JpaRepository<Prueba, Integer> {
 
     Optional<Prueba> findByIdVehiculoAndFechaHoraFinIsNull(Long idVehiculo);
     List<Prueba> findByFechaHoraFinIsNull(PageRequest pageRequest);
+    Optional<Prueba> findFirstByVehiculoIdOrderByFechaHoraInicioDesc(Long idVehiculo);
 }

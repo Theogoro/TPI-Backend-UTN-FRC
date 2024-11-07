@@ -31,7 +31,8 @@ public class PruebaService {
     private PruebaRepository pruebaRepository;
     @Autowired
     private VehiculoRepository vehiculoRepository;
-
+    @Autowired
+    private ApiService apiService;
 
 
     public Prueba createPrueba(PruebaDTO pruebaDto) {
@@ -43,12 +44,17 @@ public class PruebaService {
         if (!interesado.isValid()) {
             throw new BadRequestException("El interesado no cumple con los requisitos (Licencia vencida o restringido)");
         }
+        // TODO: Ver que el cliente no este en una prueba activa
 
         Vehiculo vehiculo = vehiculoRepository.findById(prueba.getIdVehiculo()).orElseThrow(() -> new BadRequestException("No se encontro el vehiculo"));
         Optional<Prueba> pruebas = pruebaRepository.findByIdVehiculoAndFechaHoraFinIsNull(vehiculo.getId());
 
         if (pruebas.isPresent()) {
             throw new BadRequestException("El vehiculo esta en una prueba");
+        }
+
+        if (apiService.employeeExists(prueba.getIdEmpleado())) {
+            throw new BadRequestException("El empleado no existe");
         }
 
         return pruebaRepository.save(prueba);

@@ -27,18 +27,15 @@ public class PosicionController {
   private PosicionService posicionService;
   @Autowired
   private ApiService apiService;
-
-  @Value("${external.api-url}")
-  private String apiUrl;
   
   @PostMapping("")
   public ResponseEntity<Posicion> createPosicion(@Valid @RequestBody PosicionDTO posicion) {
-    ConfiguracionDTO configuracion = apiService.callExternalApi(apiUrl, ConfiguracionDTO.class);
+    ConfiguracionDTO configuracion = apiService.getConfiguracion();
     return ResponseEntity.ok(posicionService.savePosicion(posicion, configuracion));
   }
 
   @GetMapping("")
   public String ok() {
-    return apiUrl;
+    return "ok";
   }
 }
