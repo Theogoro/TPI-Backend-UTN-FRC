@@ -1,8 +1,7 @@
-package com.backend.pruebas.model.entity;
+package com.backend.notificaciones.model.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-
 
 @Entity
 @Data
@@ -16,5 +15,4 @@ public class Notificacion {
     private Long idEmpleado;
     @Column(name = "id_interesado")
     private Long idInteresado;
-
 }

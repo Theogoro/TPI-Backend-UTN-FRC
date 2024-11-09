@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:sqlite:./database.db
+    url: jdbc:sqlite:./notificaciones.db
     driver-class-name: org.sqlite.JDBC
   jpa:
     database-platform: org.hibernate.community.dialect.SQLiteDialect
@@ -13,3 +13,11 @@ spring:
     name: notificaciones-service
 server:
   port: 8083
+mail:
+  smtp:
+    host: smtp.gmail.com
+    port: 587
+    user: tpbackend7@gmail.com
+    password: -----
+    starttls:
+      enable: true
