@@ -98,7 +98,7 @@ public class PosicionService {
     return true;
   }
 
-  public double KmRecorridosPorVehiculoEnUnPeriodo(int idVehiculo, LocalDateTime fechaHoraInicio,LocalDateTime fechaHoraFin) {
+  public double KmRecorridosPorVehiculoEnUnPeriodo(long idVehiculo, LocalDateTime fechaHoraInicio,LocalDateTime fechaHoraFin) {
     List<Posicion> posiciones = posicionRepository.findByIdVehiculoAndFechaHoraIsBetween(idVehiculo, fechaHoraInicio, fechaHoraFin);
     double distanciaTotal = 0;
     for (int i = 0; i < posiciones.size() - 1; i++) {

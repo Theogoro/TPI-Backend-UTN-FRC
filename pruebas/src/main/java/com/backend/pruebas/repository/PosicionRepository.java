@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface PosicionRepository extends JpaRepository<Posicion, Integer> {
-    List<Posicion> findByIdVehiculoAndFechaHoraIsBetween(int idVehiculo, LocalDateTime fechaHoraMin, LocalDateTime fechaHoraMax);
+    List<Posicion> findByIdVehiculoAndFechaHoraIsBetween(long idVehiculo, LocalDateTime fechaHoraMin, LocalDateTime fechaHoraMax);
 }
