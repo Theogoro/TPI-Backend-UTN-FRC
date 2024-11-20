@@ -81,14 +81,14 @@ public class PruebaService {
     }
 
     public List<PruebaDTO> getPruebasConIncidentes() {
-        return pruebaRepository.findByTuvoIncidente().stream().map(PruebaDTO::new).toList();
+        return pruebaRepository.findByTuvoIncidente(true).stream().map(PruebaDTO::new).toList();
     }
 
     public List<PruebaDTO> getPruebasConIncidentesPorEmpleado(int id) {
-        return pruebaRepository.findByTuvoIncidenteAndIdEmpleado(id).stream().map(PruebaDTO::new).toList();
+        return pruebaRepository.findByTuvoIncidenteAndIdEmpleado(true,id).stream().map(PruebaDTO::new).toList();
     }
 
     public List<PruebaDTO> getPruebasConIncidentesPorVehiculo(int id) {
-        return pruebaRepository.findByTuvoIncidenteAndIdVehiculo(id).stream().map(PruebaDTO::new).toList();
+        return pruebaRepository.findByTuvoIncidenteAndIdVehiculo(true,id).stream().map(PruebaDTO::new).toList();
     }
 }

@@ -31,10 +31,10 @@ public class PosicionController {
     return ResponseEntity.ok(posicionService.savePosicion(posicion, configuracion));
   }
 
-  @GetMapping("/informe/kmrecorridos/{id}/{fechaHoraInicio}/{fechaHoraInicio}")
+  @GetMapping("/informe/kmrecorridos/{id}/{fechaHoraInicio}/{fechaHoraFin}")
   public double KmRecorridosPorVehiculoEnUnPeriodo(@PathVariable(name = "id") int id,
                                                    @PathVariable(name = "fechaHoraInicio")LocalDateTime fechaHoraInicio,
-                                                   @PathVariable(name = "fechaHoraInicio")LocalDateTime fechaHoraFin
+                                                   @PathVariable(name = "fechaHoraFin")LocalDateTime fechaHoraFin
                                                    ) {
     return posicionService.KmRecorridosPorVehiculoEnUnPeriodo(id, fechaHoraInicio,fechaHoraFin);
   }
