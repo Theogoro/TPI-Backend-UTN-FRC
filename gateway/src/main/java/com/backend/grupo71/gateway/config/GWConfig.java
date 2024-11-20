@@ -19,7 +19,7 @@ public class GWConfig {
                 // Ruteo al Microservicio de Entradas
                 .route(p -> p.path("/api/v1/pruebas/**").uri(uriPruebas))
                 // Ruteo al Microservicio Notificaciones
-                .route(p -> p.path("/api/v1/notificaciones/**").uri(uriNotificaciones))
+                .route(p -> p.path("/api/v1/notifications/**").uri(uriNotificaciones))
                 .build();
 
     }

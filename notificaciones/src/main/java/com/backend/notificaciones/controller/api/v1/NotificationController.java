@@ -1,13 +1,13 @@
 package com.backend.notificaciones.controller.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import com.backend.notificaciones.model.dto.NotificacionDTO;
 import com.backend.notificaciones.service.MailService;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/v1/notifications")
@@ -19,8 +19,16 @@ public class NotificationController {
     this.mailService = mailService;
   }
 
+  @GetMapping()
+  public ResponseEntity<List<NotificacionDTO>> getNotifications( @RequestParam(defaultValue = "0", name = "page") int page,
+                                                                 @RequestParam(defaultValue = "10", name = "size") int size)
+  {
+    return ResponseEntity.ok(mailService.getNotifications(page, size));
+  }
+
   @PostMapping("/mail")
   public void sendMail(@RequestBody NotificacionDTO notificacion) {
-    mailService.sendMail(notificacion.getTo(), notificacion.getSubject(), notificacion.getBody());
+    // mailService.sendMail(notificacion.getTo(), notificacion.getSubject(), notificacion.getBody(), notificacion.getMotivo());
+    mailService.saveNotificacion(notificacion.toEntity());
   }
 }

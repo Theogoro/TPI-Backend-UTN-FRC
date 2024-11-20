@@ -9,10 +9,8 @@ public class Notificacion {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String tipo;
+    private String motivo;
+    private String subject;
     private String mensaje;
-    @Column(name = "id_empleado")
-    private Long idEmpleado;
-    @Column(name = "id_interesado")
-    private Long idInteresado;
+    private String destinatario;
 }
