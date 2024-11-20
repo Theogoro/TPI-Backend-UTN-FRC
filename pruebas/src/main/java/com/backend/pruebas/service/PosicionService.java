@@ -1,5 +1,7 @@
 package com.backend.pruebas.service;
 
+import java.time.LocalDateTime;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,18 +28,21 @@ public class PosicionService {
   private final VehiculoRepository vehiculoRepository;
   private final InteresadoRepository interesadoRepository;
   private final PruebaRepository pruebaRepository;
+  private final PruebaService pruebaService;
 
   @Autowired
   public PosicionService(
       PosicionRepository posicionRepository,
       VehiculoRepository vehiculoRepository,
       InteresadoRepository interesadoRepository,
-      PruebaRepository pruebaRepository
+      PruebaRepository pruebaRepository,
+      PruebaService pruebaService
   ) {
     this.posicionRepository = posicionRepository;
     this.vehiculoRepository = vehiculoRepository;
     this.interesadoRepository = interesadoRepository;
     this.pruebaRepository = pruebaRepository;
+    this.pruebaService = pruebaService;
   }
 
   @Transactional
@@ -49,6 +54,7 @@ public class PosicionService {
         Optional<Prueba> prueba = pruebaRepository.findFirstByVehiculoIdOrderByFechaHoraInicioDesc(posicionDto.getIdVehiculo());
         if (prueba.isPresent() && prueba.get().getFechaHoraFin() == null) {
           restrigirInteresado(prueba.get().getIdInteresado());
+          tuvoIncidente(prueba.get().getId());
         }
       }
       return posicion;
@@ -62,6 +68,13 @@ public class PosicionService {
         interesadoRepository.save(interesado);
       }
     });
+  }
+  private void tuvoIncidente(int idPrueba) {
+    pruebaRepository.findById(idPrueba).ifPresent(prueba -> {
+        prueba.setTuvoIncidente(true);
+        pruebaRepository.save(prueba);
+      }
+    );
   }
 
   private boolean validatePosicion(PosicionDTO posicion, ConfiguracionDTO configuracion) {
@@ -83,5 +96,16 @@ public class PosicionService {
     }
 
     return true;
+  }
+
+  public double KmRecorridosPorVehiculoEnUnPeriodo(int idVehiculo, LocalDateTime fechaHoraInicio,LocalDateTime fechaHoraFin) {
+    List<Posicion> posiciones = posicionRepository.findByIdVehiculoAndFechaHoraIsBetween(idVehiculo, fechaHoraInicio, fechaHoraFin);
+    double distanciaTotal = 0;
+    for (int i = 0; i < posiciones.size() - 1; i++) {
+      Posicion pos1 = posiciones.get(i);
+      Posicion pos2 = posiciones.get(i + 1);
+      distanciaTotal += MathUtils.distance(pos1.getLatitud(),pos1.getLongitud(), pos2.getLatitud(), pos2.getLongitud());
+    }
+    return distanciaTotal;
   }
 }

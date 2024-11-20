@@ -1,15 +1,12 @@
 package com.backend.pruebas.controller.api.v1;
 
 import java.io.ObjectInputFilter.Config;
+import java.time.LocalDateTime;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.backend.pruebas.model.dto.ConfiguracionDTO;
 import com.backend.pruebas.model.dto.PosicionDTO;
@@ -34,8 +31,11 @@ public class PosicionController {
     return ResponseEntity.ok(posicionService.savePosicion(posicion, configuracion));
   }
 
-  @GetMapping("")
-  public String ok() {
-    return "ok";
+  @GetMapping("/informe/kmrecorridos/{id}/{fechaHoraInicio}/{fechaHoraInicio}")
+  public double KmRecorridosPorVehiculoEnUnPeriodo(@PathVariable(name = "id") int id,
+                                                   @PathVariable(name = "fechaHoraInicio")LocalDateTime fechaHoraInicio,
+                                                   @PathVariable(name = "fechaHoraInicio")LocalDateTime fechaHoraFin
+                                                   ) {
+    return posicionService.KmRecorridosPorVehiculoEnUnPeriodo(id, fechaHoraInicio,fechaHoraFin);
   }
 }

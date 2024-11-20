@@ -79,4 +79,16 @@ public class PruebaService {
         prueba.setFechaHoraFin(LocalDateTime.now());
         return pruebaRepository.save(prueba);
     }
+
+    public List<PruebaDTO> getPruebasConIncidentes() {
+        return pruebaRepository.findByTuvoIncidente().stream().map(PruebaDTO::new).toList();
+    }
+
+    public List<PruebaDTO> getPruebasConIncidentesPorEmpleado(int id) {
+        return pruebaRepository.findByTuvoIncidenteAndIdEmpleado(id).stream().map(PruebaDTO::new).toList();
+    }
+
+    public List<PruebaDTO> getPruebasConIncidentesPorVehiculo(int id) {
+        return pruebaRepository.findByTuvoIncidenteAndIdVehiculo(id).stream().map(PruebaDTO::new).toList();
+    }
 }
