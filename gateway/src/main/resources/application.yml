@@ -15,8 +15,7 @@ spring:
           keycloak:
             client-id: cliente-tpi
             client-secret: ZmiMMce6zh4xKHde1FFKbfkiThDyYpyn
-            authorization-grant-type: authorization_code
-            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
-      resourceserver:
-          jwt:
-            issuer-uri:  https://labsys.frc.utn.edu.ar/aim/
+        provider:
+          keycloak:
+            issuer-uri: https://labsys.frc.utn.edu.ar/aim/realms/backend-tps/protocol/openid-connect/
+

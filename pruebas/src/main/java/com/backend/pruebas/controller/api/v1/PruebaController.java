@@ -56,11 +56,11 @@ public class PruebaController {
         return ResponseEntity.ok(pruebaService.getPruebasConIncidentes());
     }
     @GetMapping("/informe/incidentesPorEmpleado/{id}")
-    public ResponseEntity<List<PruebaDTO>> getPruebasInformePorEmpleado(@PathVariable(name = "id") int id){
+    public ResponseEntity<List<PruebaDTO>> getPruebasInformePorEmpleado(@PathVariable(name = "id") long id){
         return ResponseEntity.ok(pruebaService.getPruebasConIncidentesPorEmpleado(id));
     }
     @GetMapping("/informe/incidentesPorVehiculo/{id}")
-    public ResponseEntity<List<PruebaDTO>> getPruebasInformePorVehiculo(@PathVariable(name = "id") int id){
+    public ResponseEntity<List<PruebaDTO>> getPruebasInformePorVehiculo(@PathVariable(name = "id") long id){
         return ResponseEntity.ok(pruebaService.getPruebasConIncidentesPorVehiculo(id));
     }
 }

@@ -28,7 +28,7 @@ public class NotificationController {
 
   @PostMapping("/mail")
   public void sendMail(@RequestBody NotificacionDTO notificacion) {
-    // mailService.sendMail(notificacion.getTo(), notificacion.getSubject(), notificacion.getBody(), notificacion.getMotivo());
+    mailService.sendMail(notificacion.getTo(), notificacion.getSubject(), notificacion.getBody(), notificacion.getMotivo());
     mailService.saveNotificacion(notificacion.toEntity());
   }
 }

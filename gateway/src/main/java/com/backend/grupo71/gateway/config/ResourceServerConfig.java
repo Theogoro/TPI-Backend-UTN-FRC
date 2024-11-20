@@ -3,10 +3,13 @@ package com.backend.grupo71.gateway.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.JwtDecoders;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationConverter;
 import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
@@ -26,12 +29,16 @@ public class ResourceServerConfig {
 //    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
 //        http.authorizeHttpRequests(authorize -> authorize
 //                // Esta ruta puede ser accedida por cualquiera, sin autorización
-//                .requestMatchers("/publico/**")
-//                .permitAll()
-//
-//                // Esta ruta puede ser accedida únicamente por usuarios autenticados
+//                        .requestMatchers(HttpMethod.GET,"/api/v1/pruebas")
+//                        .hasRole("EMPLEADO")
+//                .requestMatchers(HttpMethod.POST,"/api/v1/notifications/mail")
+//                .hasRole("EMPLEADO")
 //                .requestMatchers("/informe/**")
 //                .hasRole("ADMIN")
+//                .requestMatchers(HttpMethod.POST,"/api/v1/posiciones")
+//                .hasRole("VEHICULO")
+//                .anyRequest()
+//                .permitAll()
 //
 //
 //
@@ -39,6 +46,10 @@ public class ResourceServerConfig {
 //        return http.build();
 //    }
 //
+//    @Bean
+//    JwtDecoder jwtDecoder() {
+//        return JwtDecoders.fromIssuerLocation("https://labsys.frc.utn.edu.ar/aim/realms/backend-tps");
+//    }
 //    interface AuthoritiesConverter extends Converter<Map<String, Object>, Collection<GrantedAuthority>> {}
 //
 //    @Bean
@@ -60,28 +71,8 @@ public class ResourceServerConfig {
 //    JwtAuthenticationConverter authenticationConverter(
 //            Converter<Map<String, Object>, Collection<GrantedAuthority>> authoritiesConverter) {
 //        var authenticationConverter = new JwtAuthenticationConverter();
-//        authenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> {
-//            return authoritiesConverter.convert(jwt.getClaims());
-//        });
+//        authenticationConverter.setJwtGrantedAuthoritiesConverter(jwt -> authoritiesConverter.convert(jwt.getClaims()));
 //        return authenticationConverter;
 //    }
 
-//    @Bean
-//    public JwtAuthenticationConverter jwtAuthenticationConverter() {
-//        var jwtAuthenticationConverter = new JwtAuthenticationConverter();
-//        var grantedAuthoritiesConverter = new JwtGrantedAuthoritiesConverter();
-//
-//        // Se especifica el nombre del claim a analizar
-//        grantedAuthoritiesConverter.setAuthoritiesClaimName("authorities");
-//        // Se agrega este prefijo en la conversión por una convención de Spring
-//        grantedAuthoritiesConverter.setAuthorityPrefix("ROLE_");
-//
-//        // Se asocia el conversor de Authorities al Bean que convierte el token JWT a un objeto Authorization
-//        jwtAuthenticationConverter.setJwtGrantedAuthoritiesConverter(grantedAuthoritiesConverter);
-//        // También se puede cambiar el claim que corresponde al nombre que luego se utilizará en el objeto
-//        // Authorization
-//        // jwtAuthenticationConverter.setPrincipalClaimName("user_name");
-//
-//        return jwtAuthenticationConverter;
-//    }
 }

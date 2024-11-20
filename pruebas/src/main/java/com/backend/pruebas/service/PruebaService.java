@@ -17,6 +17,7 @@ import org.springframework.boot.autoconfigure.data.web.SpringDataWebProperties.P
 import org.springframework.data.domain.PageRequest;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -33,6 +34,8 @@ public class PruebaService {
     private VehiculoRepository vehiculoRepository;
     @Autowired
     private ApiService apiService;
+    @Autowired
+    private RestTemplate restTemplate;
 
 
     public Prueba createPrueba(PruebaDTO pruebaDto) {
@@ -81,14 +84,15 @@ public class PruebaService {
     }
 
     public List<PruebaDTO> getPruebasConIncidentes() {
-        return pruebaRepository.findByTuvoIncidente().stream().map(PruebaDTO::new).toList();
+        return pruebaRepository.findByTuvoIncidente(true).stream().map(PruebaDTO::new).toList();
     }
 
-    public List<PruebaDTO> getPruebasConIncidentesPorEmpleado(int id) {
-        return pruebaRepository.findByTuvoIncidenteAndIdEmpleado(id).stream().map(PruebaDTO::new).toList();
+    public List<PruebaDTO> getPruebasConIncidentesPorEmpleado(long id) {
+        apiService.employeeExists(id);
+        return pruebaRepository.findByTuvoIncidenteAndIdEmpleado(true,id).stream().map(PruebaDTO::new).toList();
     }
 
-    public List<PruebaDTO> getPruebasConIncidentesPorVehiculo(int id) {
-        return pruebaRepository.findByTuvoIncidenteAndIdVehiculo(id).stream().map(PruebaDTO::new).toList();
+    public List<PruebaDTO> getPruebasConIncidentesPorVehiculo(long id) {
+        return pruebaRepository.findByTuvoIncidenteAndIdVehiculo(true, id).stream().map(PruebaDTO::new).toList();
     }
 }
