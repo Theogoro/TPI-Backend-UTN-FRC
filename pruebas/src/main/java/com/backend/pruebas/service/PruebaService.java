@@ -34,8 +34,6 @@ public class PruebaService {
     private VehiculoRepository vehiculoRepository;
     @Autowired
     private ApiService apiService;
-    @Autowired
-    private RestTemplate restTemplate;
 
 
     public Prueba createPrueba(PruebaDTO pruebaDto) {
@@ -93,6 +91,7 @@ public class PruebaService {
     }
 
     public List<PruebaDTO> getPruebasConIncidentesPorVehiculo(long id) {
+        vehiculoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se encontro el vehiculo"));
         return pruebaRepository.findByTuvoIncidenteAndIdVehiculo(true, id).stream().map(PruebaDTO::new).toList();
     }
 }
