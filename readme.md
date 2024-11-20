@@ -1,10 +1,10 @@
 # TPI Backend - 2024 - Grupo 71
 Integrantes:
-- Theo Berta 95064
+- Berta Theo 95064
 - Oviedo Emiliano 94847
-- asdas
-- adas
-- asd
+- Chudnosky Paula 89385
+- Fernández Pablo Gabriel 95695
+- Zarate Almada Santiago 95090
 
 Version de Java: 21
 
