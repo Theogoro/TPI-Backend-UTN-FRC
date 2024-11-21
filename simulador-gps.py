@@ -5,7 +5,7 @@ import requests
 import tkinter as tk
 from tkinter import simpledialog
 
-URL_BACKEND = "http://localhost:8082"
+URL_BACKEND = "http://localhost:8080"
 URL_CONFIGURACION = "https://labsys.frc.utn.edu.ar/apps-disponibilizadas/backend/api/v1/configuracion/"
 
 data = requests.get(URL_CONFIGURACION).json()
@@ -23,23 +23,19 @@ agencia_circle = plt.Circle((coordenadas_agencia[1], coordenadas_agencia[0]),
                             color='lightblue', alpha=0.5, label="Radio Admitido")
 ax.add_patch(agencia_circle)
 
-# Marcar la ubicación de la agencia
 plt.plot(coordenadas_agencia[1], coordenadas_agencia[0], 'bo', label="Agencia")
 
-# Dibujar cada zona restringida
 for zona in data["zonasRestringidas"]:
     noroeste = (zona["noroeste"]["lat"], zona["noroeste"]["lon"])
     sureste = (zona["sureste"]["lat"], zona["sureste"]["lon"])
     rect_width = sureste[1] - noroeste[1]
     rect_height = noroeste[0] - sureste[0]
 
-    # Agregar el rectángulo al gráfico
     rect = patches.Rectangle((noroeste[1], sureste[0]), rect_width, rect_height,
                              linewidth=1, edgecolor='r', facecolor='red', alpha=0.3, label="Zona Restringida")
     ax.add_patch(rect)
 
-# Configurar límites del gráfico con un margen más amplio
-zoom_factor = 0.05  # Incrementa el valor para ver un área mayor
+zoom_factor = 0.05
 
 ax.set_xlim(coordenadas_agencia[1] - zoom_factor, coordenadas_agencia[1] + zoom_factor)
 ax.set_ylim(coordenadas_agencia[0] - zoom_factor, coordenadas_agencia[0] + zoom_factor)
@@ -50,7 +46,6 @@ plt.legend()
 plt.title("Ubicación de Agencia, Radio Permitido y Zonas Restringidas")
 plt.grid()
 
-# Definir la función de clic
 def onclick(event):
     if event.inaxes is not None:
         lat = event.ydata
@@ -78,7 +73,4 @@ def onclick(event):
         root.destroy()
 
 fig.canvas.mpl_connect('button_press_event', onclick)
-
-
-plt.savefig("grafico.png")
 plt.show()

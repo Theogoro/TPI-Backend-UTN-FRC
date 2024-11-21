@@ -19,6 +19,9 @@ public class PruebaDTO {
     private Long empleadoId;
     private LocalDateTime fechaHoraInicio;
     private int id;
+    private LocalDateTime fechaHoraFin;
+    private String comentario;
+    private boolean tuvoIncidente;
 
 
     public Prueba toEntity() {
@@ -27,6 +30,10 @@ public class PruebaDTO {
         prueba.setIdVehiculo(vehiculoId);
         prueba.setFechaHoraInicio(LocalDateTime.now());
         prueba.setIdEmpleado(empleadoId);
+        prueba.setTuvoIncidente(tuvoIncidente);
+        prueba.setComentario(comentario);
+        prueba.setFechaHoraFin(fechaHoraFin);
+        
         return prueba;
     }
 
@@ -36,5 +43,8 @@ public class PruebaDTO {
         this.vehiculoId = prueba.getIdVehiculo();
         this.empleadoId = prueba.getIdEmpleado();
         this.fechaHoraInicio = prueba.getFechaHoraInicio();
+        this.fechaHoraFin = prueba.getFechaHoraFin();
+        this.comentario = prueba.getComentario();
+        this.tuvoIncidente = prueba.isTuvoIncidente();
     }
 }

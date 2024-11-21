@@ -8,14 +8,3 @@ spring:
   main:
     web-application-type: reactive
     allow-bean-definition-overriding: true
-  security:
-    oauth2:
-      client:
-        registration:
-          keycloak:
-            client-id: cliente-tpi
-            client-secret: ZmiMMce6zh4xKHde1FFKbfkiThDyYpyn
-        provider:
-          keycloak:
-            issuer-uri: https://labsys.frc.utn.edu.ar/aim/realms/backend-tps/protocol/openid-connect/
-

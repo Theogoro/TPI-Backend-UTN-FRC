@@ -19,12 +19,12 @@ public class PruebaController {
     @Autowired
     private PruebaService pruebaService;
 
-    @PostMapping("")
+    @PostMapping("/")
     public ResponseEntity<Prueba> newPrueba(@Valid @RequestBody PruebaDTO pruebaDTO) {
         return ResponseEntity.ok(pruebaService.createPrueba(pruebaDTO));
     }
 
-    @GetMapping("")
+    @GetMapping("/")
     public ResponseEntity<List<PruebaDTO>> getPruebas(
         @RequestParam(defaultValue = "0", name = "page") int page,
         @RequestParam(defaultValue = "10", name = "size") int size

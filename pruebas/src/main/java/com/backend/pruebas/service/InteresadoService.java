@@ -20,6 +20,7 @@ public class InteresadoService {
 
   public Interesado createInteresado(InteresadoDTO interesadoDto) {
     Interesado interesado = interesadoDto.toEntity();
+    interesado.setRestringido(false);
     return interesadoRepository.save(interesado);
   }
 }

@@ -30,6 +30,7 @@ public class Interesado {
     @Column(name = "fecha_vencimiento_licencia", nullable = false)
     private LocalDateTime fechaVencimientoLicencia;
 
+    @Column(name = "email", nullable = false, unique = true)
     private String email;
 
     @OneToMany(mappedBy = "idInteresado")

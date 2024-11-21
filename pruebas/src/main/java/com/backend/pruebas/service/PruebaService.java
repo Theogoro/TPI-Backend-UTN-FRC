@@ -22,6 +22,8 @@ import org.springframework.web.client.RestTemplate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+// import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 @Service
 public class PruebaService {
@@ -63,15 +65,20 @@ public class PruebaService {
 
     public List<PruebaDTO> getPruebas(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        return pruebaRepository.findAll(pageRequest).getContent().stream().map(PruebaDTO::new).toList();
+        return pruebaRepository.findAll(pageRequest)
+                               .getContent()
+                               .stream()
+                               .map(PruebaDTO::new)
+                               .collect(Collectors.toList()); // Convierte el stream a una lista
     }
+    
 
     public PruebaDTO getPruebaById(int id) {
         return new PruebaDTO(pruebaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se encontro la prueba")));
     }
     public List<PruebaDTO> getPruebasEnCurso(int page, int size) {
         PageRequest pageRequest = PageRequest.of(page, size);
-        return pruebaRepository.findByFechaHoraFinIsNull(pageRequest).stream().map(PruebaDTO::new).toList();
+        return pruebaRepository.findByFechaHoraFinIsNull(pageRequest).stream().map(PruebaDTO::new).collect(Collectors.toList());
     }
 
     public Prueba finalizarPrueba(int id, String comentario) {
@@ -82,16 +89,16 @@ public class PruebaService {
     }
 
     public List<PruebaDTO> getPruebasConIncidentes() {
-        return pruebaRepository.findByTuvoIncidente(true).stream().map(PruebaDTO::new).toList();
+        return pruebaRepository.findByTuvoIncidente(true).stream().map(PruebaDTO::new).collect(Collectors.toList());
     }
 
     public List<PruebaDTO> getPruebasConIncidentesPorEmpleado(long id) {
         apiService.employeeExists(id);
-        return pruebaRepository.findByTuvoIncidenteAndIdEmpleado(true,id).stream().map(PruebaDTO::new).toList();
+        return pruebaRepository.findByTuvoIncidenteAndIdEmpleado(true,id).stream().map(PruebaDTO::new).collect(Collectors.toList());
     }
 
     public List<PruebaDTO> getPruebasConIncidentesPorVehiculo(long id) {
         vehiculoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("No se encontro el vehiculo"));
-        return pruebaRepository.findByTuvoIncidenteAndIdVehiculo(true, id).stream().map(PruebaDTO::new).toList();
+        return pruebaRepository.findByTuvoIncidenteAndIdVehiculo(true, id).stream().map(PruebaDTO::new).collect(Collectors.toList());
     }
 }
