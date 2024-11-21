@@ -59,4 +59,11 @@ public class EmployeeController {
     employeeService.deleteEmployee(id);
     return ResponseEntity.noContent().build();
   }
+
+  @PostMapping("/{id}/notifyBadTest")
+  public ResponseEntity<Object> notifyBadTest(@PathVariable(name = "id") Long id) {
+    System.out.println("Notifying bad test for employee with id " + id);
+    employeeService.notifyBadTest(id);
+    return ResponseEntity.noContent().build();
+  }
 }

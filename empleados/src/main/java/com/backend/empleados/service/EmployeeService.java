@@ -17,9 +17,12 @@ public class EmployeeService {
   
   @Autowired
   private final EmployeeRepository employeeRepository;
-
-  public EmployeeService(EmployeeRepository employeeRepository) {
+  @Autowired
+  private final ApiService apiService;
+  
+  public EmployeeService(EmployeeRepository employeeRepository, ApiService apiService) {
     this.employeeRepository = employeeRepository;
+    this.apiService = apiService;
   }
 
   public List<Employee> getEmployees(int page, int size) {
@@ -57,5 +60,11 @@ public class EmployeeService {
     employeeUpdated.setId(employeeToUpdate.getId());
 
     return employeeRepository.save(employeeUpdated);
+  }
+
+  public void notifyBadTest(Long id) {
+    Employee employee = employeeRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Employee not found"));
+
+    apiService.notifyEmployeeBadTest(employee.getId(), employee.getEmail());
   }
 }

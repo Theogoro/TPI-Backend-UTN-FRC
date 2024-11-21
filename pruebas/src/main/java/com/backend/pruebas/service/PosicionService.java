@@ -29,6 +29,7 @@ public class PosicionService {
   private final InteresadoRepository interesadoRepository;
   private final PruebaRepository pruebaRepository;
   private final PruebaService pruebaService;
+  private final ApiService apiService;
 
   @Autowired
   public PosicionService(
@@ -36,13 +37,15 @@ public class PosicionService {
       VehiculoRepository vehiculoRepository,
       InteresadoRepository interesadoRepository,
       PruebaRepository pruebaRepository,
-      PruebaService pruebaService
+      PruebaService pruebaService,
+      ApiService apiService
   ) {
     this.posicionRepository = posicionRepository;
     this.vehiculoRepository = vehiculoRepository;
     this.interesadoRepository = interesadoRepository;
     this.pruebaRepository = pruebaRepository;
     this.pruebaService = pruebaService;
+    this.apiService = apiService;
   }
 
   @Transactional
@@ -50,11 +53,11 @@ public class PosicionService {
       vehiculoRepository.findById(posicionDto.getIdVehiculo()).orElseThrow(() -> new BadRequestException("El vehiculo no existe"));
       Posicion posicion = posicionRepository.save(posicionDto.toEntity());
       if (!validatePosicion(posicionDto, configuracionDto)) {
-        // TODO: NOTIFICAR AL EMPLEADO
         Optional<Prueba> prueba = pruebaRepository.findFirstByVehiculoIdOrderByFechaHoraInicioDesc(posicionDto.getIdVehiculo());
         if (prueba.isPresent() && prueba.get().getFechaHoraFin() == null) {
           restrigirInteresado(prueba.get().getIdInteresado());
           tuvoIncidente(prueba.get().getId());
+          apiService.notifyEmployee(prueba.get().getIdEmpleado());
         }
       }
       return posicion;
@@ -85,12 +88,10 @@ public class PosicionService {
     double longitudAgencia = configuracion.getCoordenadasAgencia().getLon();
   
     if (MathUtils.distance(latitud, longitud, latitudAgencia, longitudAgencia) > radioAdmitidoKm) {
-      // throw new BadRequestException("La posición está fuera del rango permitido");
       return false;
     }
     for (ConfiguracionDTO.Zona zona : configuracion.getZonasRestringidas()) {
       if (MathUtils.isInsideZone(latitud, longitud, zona.getNoroeste(), zona.getSureste())) {
-        // throw new BadRequestException("La posición está dentro de una zona restringida");
         return false;
       }
     }

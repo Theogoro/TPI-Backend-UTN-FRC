@@ -13,6 +13,9 @@ public class ApiService {
     @Value("${external.api-url}")
     private String URL_CONF;
 
+    @Value("${external.gateway-url}")
+    private String URL_GATEWAY;
+
     private final RestTemplate restTemplate;
 
     @Autowired
@@ -30,7 +33,7 @@ public class ApiService {
 
     public boolean employeeExists(Long id) {
         try {
-            return restTemplate.getForEntity(URL_CONF + "/api/v1/employees/" + id, Object.class).getStatusCode().is2xxSuccessful();
+            return restTemplate.getForEntity(URL_GATEWAY + "/api/v1/employees/" + id, Object.class).getStatusCode().is2xxSuccessful();
         } catch (Exception e) {
             if (e.getMessage().contains("404")) {
                 return false;
@@ -40,6 +43,8 @@ public class ApiService {
     }
 
     public void notifyEmployee(Long id) {
-        // restTemplate.postForEntity(URL_CONF + "/api/v1/employees/" + id + "/notify", null, Object.class);
+        System.out.println("Notifying employee with id " + id);
+        System.out.println(URL_GATEWAY + "/api/v1/employees/" + id + "/notifyBadTest");
+        restTemplate.postForEntity(URL_GATEWAY + "/api/v1/employees/" + id + "/notifyBadTest", null, Object.class);
     }
 }
