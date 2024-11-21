@@ -1,6 +1,8 @@
-api-gw.url-microservicio-employees: http://localhost:8081
-api-gw.url-microservicio-pruebas: http://localhost:8082
-api-gw.url-microservicio-notificaciones: http://localhost:8083
+api-gw:
+  url-microservicio-employees: http://localhost:8081
+  url-microservicio-pruebas: http://localhost:8082
+  url-microservicio-notificaciones: http://localhost:8083
+
 server:
   port: 8080
 
@@ -10,12 +12,6 @@ spring:
     allow-bean-definition-overriding: true
   security:
     oauth2:
-      client:
-        registration:
-          keycloak:
-            client-id: cliente-tpi
-            client-secret: ZmiMMce6zh4xKHde1FFKbfkiThDyYpyn
-        provider:
-          keycloak:
-            issuer-uri: https://labsys.frc.utn.edu.ar/aim/realms/backend-tps/protocol/openid-connect/
-
+      resourceserver:
+        jwt:
+          issuer-uri: https://labsys.frc.utn.edu.ar/aim/realms/backend-tps
