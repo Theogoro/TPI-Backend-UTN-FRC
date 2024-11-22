@@ -37,12 +37,16 @@ public class ResourceServerConfig {
     http
             .authorizeExchange(authorize -> authorize
                     // Rutas accesibles por empleados
-                    .pathMatchers(HttpMethod.GET, "/api/v1/pruebas/").hasRole("EMPLEADO")
+                    //EMPLEADO UNICAMENTE PUEDA CREAR UNA PRUEBA
+                    .pathMatchers(HttpMethod.POST, "/api/v1/pruebas/").hasRole("EMPLEADO")
+                    //EMPLEADO UNICAMENTE PUEDA ENVIAR NOTIFICACIONES
                     .pathMatchers("/api/v1/notifications/mail").hasRole("EMPLEADO")
                     // Rutas accesibles por admin
+                    //ADMIN UNICAMENTE PUEDA VER REPORTES/INFORMES
                     .pathMatchers("/api/v1/pruebas/informe/**").hasRole("ADMIN")
                     .pathMatchers("/api/v1/posiciones/informe/**").hasRole("ADMIN")
                     // Rutas accesibles por vehículos
+                    //USUARIO ASOCIADO A UN VEHICULO MANDE POSICIONES
                     .pathMatchers("/api/v1/posiciones").hasRole("VEHICULO")
                     .anyExchange().authenticated()
             )
