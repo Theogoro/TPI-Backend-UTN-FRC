@@ -10,6 +10,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -19,6 +20,7 @@ public class PruebaController {
     @Autowired
     private PruebaService pruebaService;
 
+
     @PostMapping("/")
     public ResponseEntity<Prueba> newPrueba(@Valid @RequestBody PruebaDTO pruebaDTO) {
         return ResponseEntity.ok(pruebaService.createPrueba(pruebaDTO));
@@ -27,8 +29,10 @@ public class PruebaController {
     @GetMapping("/")
     public ResponseEntity<List<PruebaDTO>> getPruebas(
         @RequestParam(defaultValue = "0", name = "page") int page,
-        @RequestParam(defaultValue = "10", name = "size") int size
+        @RequestParam(defaultValue = "10", name = "size") int size,
+        @RequestHeader(name = "Authorization", required = false) String authorizationHeader
     ) {
+        System.out.println("Authorization Header: " + authorizationHeader); // Imprime el token JWT.
         return ResponseEntity.ok(pruebaService.getPruebas(page, size));
     }
 

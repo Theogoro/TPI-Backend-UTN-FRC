@@ -2,6 +2,7 @@ package com.backend.notificaciones.controller.api.v1;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import com.backend.notificaciones.model.dto.NotificacionDTO;
@@ -26,6 +27,7 @@ public class NotificationController {
     return ResponseEntity.ok(mailService.getNotifications(page, size));
   }
 
+  @PreAuthorize("hasRole('EMPLEADO')")
   @PostMapping("/mail")
   public void sendMail(@RequestBody NotificacionDTO notificacion) {
     mailService.sendMail(notificacion.getTo(), notificacion.getSubject(), notificacion.getBody(), notificacion.getMotivo());
